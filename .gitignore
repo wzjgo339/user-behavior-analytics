@@ -1,0 +1,8 @@
+node_modules/
+target/
+dist/
+*.jar
+*.log
+clickhouse-data/
+mysql-data/
+.env

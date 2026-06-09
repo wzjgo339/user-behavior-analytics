@@ -1,0 +1,14 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>用户行为实时分析平台</title>
+  </head>
+  <body>
+    <div id="app"></div>
+    <!-- sockjs-client 依赖 Node.js 的 global，浏览器环境用 globalThis 替代 -->
+    <script>window.global = window.globalThis;</script>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

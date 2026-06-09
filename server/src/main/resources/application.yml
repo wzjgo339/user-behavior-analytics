@@ -1,0 +1,34 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: analytics-server
+  # Redis
+  data:
+    redis:
+      host: localhost
+      port: 6379
+      timeout: 5000
+
+clickhouse:
+  jdbc-url: jdbc:clickhouse://localhost:8123/default?user=analytics
+  driver-class: com.clickhouse.jdbc.ClickHouseDriver
+
+# 聚合数据推送间隔（毫秒）
+analytics:
+  push-interval: 5000
+
+---
+# Docker 环境 profile：使用容器内 hostname 连接
+spring:
+  config:
+    activate:
+      on-profile: docker
+
+  data:
+    redis:
+      host: redis
+
+clickhouse:
+  jdbc-url: jdbc:clickhouse://clickhouse:8123/default?user=analytics

@@ -1,0 +1,29 @@
+filebeat.inputs:
+  - type: log
+    enabled: true
+    paths:
+      - /var/log/nginx/access.log
+    fields:
+      log_type: nginx_access
+    # 从头读取（首次调试用，稳定后去掉）
+    tail_files: false
+
+output.kafka:
+  enabled: true
+  hosts: ["kafka:9092"]
+  topic: "nginx-access-log"
+  partition.round_robin:
+    reachable_only: true
+  required_acks: 1
+  compression: gzip
+  max_message_bytes: 1048576
+
+# 避免 Filebeat 自己发监控数据到 es
+monitoring.enabled: false
+
+# 日志记录（方便排查）
+logging.level: info
+logging.to_files: true
+logging.files:
+  path: /var/log/filebeat
+  name: filebeat.log
